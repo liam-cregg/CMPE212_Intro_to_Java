@@ -2,7 +2,7 @@
 import java.io.*;
 
 /**
- * @author Liam
+ * @author Liam Cregg - 16LBC1 - 20054881
  * @version 1.0
  */
 public class Assn2_16LBC1 {
