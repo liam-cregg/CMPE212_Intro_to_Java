@@ -15,22 +15,22 @@ public class Pizza {
         size = sz;
         cheese = cz;
         ham = hm;
-        if(hm == LegalPizzaChoices.Topping.Single) {
+        if (hm == LegalPizzaChoices.Topping.Single) {
             pineapple = pa;
             pepper = pp;
-        }
-        else {
-            pineapple = LegalPizzaChoices.Topping.None;
-            pepper = LegalPizzaChoices.Topping.None;
+        } else {
+            if (pa == LegalPizzaChoices.Topping.Single || pp == LegalPizzaChoices.Topping.Single) {
+                System.out.println("Cannot have pineapple or green pepper if not having ham, sorry :(. Excluding these toppings");
+                pineapple = LegalPizzaChoices.Topping.None;
+                pepper = LegalPizzaChoices.Topping.None;
+            }
         }
     }
 
     public Pizza() {
-        size = LegalPizzaChoices.Size.Small;
-        cheese = LegalPizzaChoices.Cheese.Single;
-        pineapple = LegalPizzaChoices.Topping.None;
-        pepper = LegalPizzaChoices.Topping.None;
-        ham = LegalPizzaChoices.Topping.None;
+        this(LegalPizzaChoices.Size.Small, LegalPizzaChoices.Cheese.Single,
+                LegalPizzaChoices.Topping.None, LegalPizzaChoices.Topping.None,
+                LegalPizzaChoices.Topping.Single);
     }
 
     public double getCost() {
@@ -51,25 +51,28 @@ public class Pizza {
             s += ", green pepper";
         if(ham == LegalPizzaChoices.Topping.Single)
             s += ", ham";
-        s += ". Cost: $" getCost() " each.";
+        s += ". Cost: $" + getCost() + " each.";
         return s;
     }
 
     @Override
     public boolean equals(Object other) {
         if(other instanceof Pizza) {
-            if(((Pizza) other).size == size && ((Pizza) other).cheese == cheese && ((Pizza) other).ham == ham
-                    && ((Pizza) other).pepper == pepper && ((Pizza) other).pineapple == pineapple)
-                return true;
+            return (((Pizza) other).size == size && ((Pizza) other).cheese == cheese && ((Pizza) other).ham == ham
+                    && ((Pizza) other).pepper == pepper && ((Pizza) other).pineapple == pineapple);
             }
         return false;
     }
-
+    @Override
     public Pizza clone() {
         Pizza pizzaCopy = null;
-        try {
+        try
+        {
             pizzaCopy = new Pizza(size, cheese, pineapple, pepper, ham);
         }
-        catch(IllegalPizza)
+        catch(ExceptionInInitializerError e) {
+            System.out.println(e.getMessage());
+        }
+        return pizzaCopy;
     }
 }
