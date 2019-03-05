@@ -1,8 +1,12 @@
+import java.io.Serializable;
+
 /**
  * @author Liam Cregg - 16LBC1 - 20054881
  * @version 1.0
  */
-public class Pizza {
+public class Pizza implements Serializable {
+
+    private static final long serialVersionUID = -3919996667157794031L;
     private LegalPizzaChoices.Size size;
     private LegalPizzaChoices.Cheese cheese;
     private LegalPizzaChoices.Topping pineapple;

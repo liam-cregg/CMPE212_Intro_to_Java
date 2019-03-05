@@ -1,11 +1,13 @@
+import java.io.Serializable;
 
-public class LineItem {
+public class LineItem implements Comparable<LineItem>, Serializable {
 
+    private static final long serialVersionUID = 858475072685585096L;
     public int numPizzas;
     private Pizza pizzaType;
 
     LineItem(int num, Pizza type) throws IllegalPizza {
-        setNum(num);
+        setNumber(num);
         pizzaType = type;
     }
 
@@ -14,21 +16,21 @@ public class LineItem {
         pizzaType = type;
     }
 
-    public void setNum(int num) throws IllegalPizza {
+    public void setNumber(int num) throws IllegalPizza {
         if(num <= 0 || num >= 100)
             throw new IllegalPizza("Invalid number of pizzas!");
         this.numPizzas = num;
     }
 
-    public int getNumPizzas() {
+    public int getNumber() {
         return this.numPizzas;
     }
 
-    public Pizza getPizzaType() {
+    public Pizza getPizza() {
         return this.pizzaType;
     }
 
-    public double getLinePrice() {
+    public double getCost() {
         double price = 0;
         price += this.numPizzas * this.pizzaType.getCost();
         if(this.numPizzas >= 20)
@@ -49,5 +51,8 @@ public class LineItem {
         return s;
     }
 
-
+    @Override
+    public int compareTo(LineItem other) {
+        return (int)(other.getCost() - this.getCost());
+    }
 }
