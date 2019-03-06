@@ -3,23 +3,28 @@ import java.io.Serializable;
 public class LineItem implements Comparable<LineItem>, Serializable {
 
     private static final long serialVersionUID = 858475072685585096L;
-    public int numPizzas;
+    private int numPizzas;
     private Pizza pizzaType;
 
     LineItem(int num, Pizza type) throws IllegalPizza {
         setNumber(num);
-        pizzaType = type;
+        setPizza(type);
     }
 
-    LineItem(Pizza type) {
-        numPizzas = 1;
-        pizzaType = type;
+    LineItem(Pizza type) throws IllegalPizza {
+        setNumber(1);
+        setPizza(type);
     }
 
     public void setNumber(int num) throws IllegalPizza {
-        if(num <= 0 || num >= 100)
+        if(num < 1 || num > 100)
             throw new IllegalPizza("Invalid number of pizzas!");
         this.numPizzas = num;
+    }
+    private void setPizza(Pizza type) throws IllegalPizza {
+        if(type == null)
+            throw new IllegalPizza("Invalid pizza!");
+        pizzaType = type;
     }
 
     public int getNumber() {
@@ -42,12 +47,10 @@ public class LineItem implements Comparable<LineItem>, Serializable {
 
     @Override
     public String toString() {
-        String s = null;
-        if(this.numPizzas < 100)
-            s += " ";
+        String s = "";
         if(this.numPizzas < 10)
-            s += " ";
-        s += this.pizzaType.toString();
+            s = " ";
+        s += String.format("%d ", this.getNumber()) + this.pizzaType.toString();
         return s;
     }
 

@@ -13,25 +13,39 @@ public class Pizza implements Serializable {
     private LegalPizzaChoices.Topping pepper;
     private LegalPizzaChoices.Topping ham;
 
-    public Pizza(LegalPizzaChoices.Size sz, LegalPizzaChoices.Cheese cz,
+    public Pizza (LegalPizzaChoices.Size sz, LegalPizzaChoices.Cheese cz,
                  LegalPizzaChoices.Topping pa, LegalPizzaChoices.Topping pp,
-                 LegalPizzaChoices.Topping hm) {
+                 LegalPizzaChoices.Topping hm) throws IllegalPizza {
+        setSize(sz);
+        setCheese(cz);
+        setToppings(pa, pp, hm);
+    }
+
+    private void setSize(LegalPizzaChoices.Size sz) throws IllegalPizza {
+        if(sz == null)
+            throw new IllegalPizza("Incomplete order!");
         size = sz;
+    }
+    private void setCheese(LegalPizzaChoices.Cheese cz) throws IllegalPizza {
+        if(cz == null)
+            throw new IllegalPizza("Incomplete order!");
         cheese = cz;
+    }
+    private void setToppings(LegalPizzaChoices.Topping pa, LegalPizzaChoices.Topping pp,
+                             LegalPizzaChoices.Topping hm) throws IllegalPizza {
+        if(pa == null || pp == null || hm == null)
+            throw new IllegalPizza("Incomplete order!");
         ham = hm;
-        if (hm == LegalPizzaChoices.Topping.Single) {
+        if(ham == LegalPizzaChoices.Topping.Single) {
             pineapple = pa;
             pepper = pp;
-        } else {
-            if (pa == LegalPizzaChoices.Topping.Single || pp == LegalPizzaChoices.Topping.Single) {
-                System.out.println("Cannot have pineapple or green pepper if not having ham, sorry :(. Excluding these toppings");
-                pineapple = LegalPizzaChoices.Topping.None;
-                pepper = LegalPizzaChoices.Topping.None;
-            }
+        }
+        else if(pa == LegalPizzaChoices.Topping.Single || pp == LegalPizzaChoices.Topping.Single) {
+            throw new IllegalPizza("Illegal combination of toppings!");
         }
     }
 
-    public Pizza() {
+    public Pizza() throws IllegalPizza {
         this(LegalPizzaChoices.Size.Small, LegalPizzaChoices.Cheese.Single,
                 LegalPizzaChoices.Topping.None, LegalPizzaChoices.Topping.None,
                 LegalPizzaChoices.Topping.Single);
@@ -48,14 +62,14 @@ public class Pizza implements Serializable {
 
     @Override
     public String toString() {
-        String s = size + "pizza, " + cheese + "cheese";
+        String s = size + " pizza, " + cheese + " cheese";
         if(pineapple == LegalPizzaChoices.Topping.Single)
             s += ", pineapple";
         if(pepper == LegalPizzaChoices.Topping.Single)
             s += ", green pepper";
         if(ham == LegalPizzaChoices.Topping.Single)
             s += ", ham";
-        s += ". Cost: $" + getCost() + " each.";
+        s += ". Cost: $" + String.format("%.2f",getCost()) + " each.";
         return s;
     }
 
@@ -74,8 +88,8 @@ public class Pizza implements Serializable {
         {
             pizzaCopy = new Pizza(size, cheese, pineapple, pepper, ham);
         }
-        catch(ExceptionInInitializerError e) {
-            System.out.println(e.getMessage());
+        catch(IllegalPizza e) {
+            throw new RuntimeException(e);
         }
         return pizzaCopy;
     }
