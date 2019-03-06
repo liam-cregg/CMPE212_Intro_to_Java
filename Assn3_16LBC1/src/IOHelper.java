@@ -68,7 +68,9 @@ public class IOHelper {
     public static String getString(String prompt) {
         String userText;
         System.out.print(prompt);
-        userText = screenInput.nextLine();
+        do {
+            userText = screenInput.nextLine();
+        } while(userText.equals(""));
         return userText;
     } // end one parameter getString method
 

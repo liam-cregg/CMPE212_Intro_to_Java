@@ -13,36 +13,38 @@ public class Pizza implements Serializable {
     private LegalPizzaChoices.Topping pepper;
     private LegalPizzaChoices.Topping ham;
 
-    public Pizza (LegalPizzaChoices.Size sz, LegalPizzaChoices.Cheese cz,
-                 LegalPizzaChoices.Topping pa, LegalPizzaChoices.Topping pp,
-                 LegalPizzaChoices.Topping hm) throws IllegalPizza {
-        setSize(sz);
-        setCheese(cz);
-        setToppings(pa, pp, hm);
+    public Pizza (LegalPizzaChoices.Size size, LegalPizzaChoices.Cheese cheese,
+                 LegalPizzaChoices.Topping pineapple, LegalPizzaChoices.Topping pepper,
+                 LegalPizzaChoices.Topping ham) throws IllegalPizza {
+        setSize(size);
+        setCheese(cheese);
+        setToppings(pineapple, pepper, ham);
     }
 
-    private void setSize(LegalPizzaChoices.Size sz) throws IllegalPizza {
-        if(sz == null)
+    private void setSize(LegalPizzaChoices.Size size) throws IllegalPizza {
+        if(size == null)
             throw new IllegalPizza("Incomplete order!");
-        size = sz;
+        this.size = size;
     }
-    private void setCheese(LegalPizzaChoices.Cheese cz) throws IllegalPizza {
-        if(cz == null)
+    private void setCheese(LegalPizzaChoices.Cheese cheese) throws IllegalPizza {
+        if(cheese == null)
             throw new IllegalPizza("Incomplete order!");
-        cheese = cz;
+        this.cheese = cheese;
     }
-    private void setToppings(LegalPizzaChoices.Topping pa, LegalPizzaChoices.Topping pp,
-                             LegalPizzaChoices.Topping hm) throws IllegalPizza {
-        if(pa == null || pp == null || hm == null)
+    private void setToppings(LegalPizzaChoices.Topping pineapple, LegalPizzaChoices.Topping pepper,
+                             LegalPizzaChoices.Topping ham) throws IllegalPizza {
+        if(pineapple == null || pepper == null || ham == null)
             throw new IllegalPizza("Incomplete order!");
-        ham = hm;
-        if(ham == LegalPizzaChoices.Topping.Single) {
-            pineapple = pa;
-            pepper = pp;
+        this.ham = ham;
+        if(this.ham == LegalPizzaChoices.Topping.Single) {
+            this.pineapple = pineapple;
+            this.pepper = pepper;
         }
-        else if(pa == LegalPizzaChoices.Topping.Single || pp == LegalPizzaChoices.Topping.Single) {
+        else if(pineapple == LegalPizzaChoices.Topping.Single || pepper == LegalPizzaChoices.Topping.Single) {
             throw new IllegalPizza("Illegal combination of toppings!");
         }
+        this.pineapple = pineapple;
+        this.pepper = pepper;
     }
 
     public Pizza() throws IllegalPizza {
