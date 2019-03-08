@@ -30,27 +30,29 @@ public class Pizza implements Serializable {
         setCheese(cheese);
         setToppings(pineapple, pepper, ham);
     }
-
+    // Sets the size for the Pizza object. Throws IllegalPizza if the size is null
     private void setSize(LegalPizzaChoices.Size size) throws IllegalPizza {
         if(size == null)
             throw new IllegalPizza("Incomplete order!");
         this.size = size;
     }
+    // Sets the cheese for the Pizza object. Throws IllegalPizza if the cheese is null
     private void setCheese(LegalPizzaChoices.Cheese cheese) throws IllegalPizza {
         if(cheese == null)
             throw new IllegalPizza("Incomplete order!");
         this.cheese = cheese;
     }
+    // Sets the toppings for the Pizza object. Throws IllegalPizza if any are null or there's an illegal topping combination
     private void setToppings(LegalPizzaChoices.Topping pineapple, LegalPizzaChoices.Topping pepper,
                              LegalPizzaChoices.Topping ham) throws IllegalPizza {
         if(pineapple == null || pepper == null || ham == null)
             throw new IllegalPizza("Incomplete order!");
         this.ham = ham;
-        if(this.ham == LegalPizzaChoices.Topping.Single) {
+        if(this.ham == LegalPizzaChoices.Topping.Single) { // Check if ham has been added, allow other toppings if it has
             this.pineapple = pineapple;
             this.pepper = pepper;
         }
-        else if(pineapple == LegalPizzaChoices.Topping.Single || pepper == LegalPizzaChoices.Topping.Single) {
+        else if(pineapple == LegalPizzaChoices.Topping.Single || pepper == LegalPizzaChoices.Topping.Single) { // Check if attempted illegal topping combo
             throw new IllegalPizza("Illegal combination of toppings!"); // Only allowed pepper or pineapple if there's ham
         }
         this.pineapple = pineapple;
