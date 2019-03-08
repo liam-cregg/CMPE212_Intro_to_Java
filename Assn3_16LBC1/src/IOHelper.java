@@ -17,6 +17,13 @@ public class IOHelper {
 
     private static Scanner screenInput = new Scanner(System.in);
 
+    /**
+     * Gets the integer value entered by the user
+     * @param low Lower bound
+     * @param prompt Message to give
+     * @param high Upper bound
+     * @return The number entered
+     */
     public static int getInt(int low, String prompt, int high) {
         int numFromUser = 0;
         String dummy;
@@ -65,12 +72,17 @@ public class IOHelper {
         return getInt(low, prompt, high);
     } // end two parameter getInt method
 
+    /**
+     * Gets the string entered by the user
+     * @param prompt Message to give
+     * @return The String entered
+     */
     public static String getString(String prompt) {
         String userText;
         System.out.print(prompt);
         do {
             userText = screenInput.nextLine();
-        } while(userText.equals(""));
+        } while(userText.equals("")); // allows user to enter unlimited empty lines
         return userText;
     } // end one parameter getString method
 

@@ -51,7 +51,7 @@ public class Pizza implements Serializable {
             this.pepper = pepper;
         }
         else if(pineapple == LegalPizzaChoices.Topping.Single || pepper == LegalPizzaChoices.Topping.Single) {
-            throw new IllegalPizza("Illegal combination of toppings!");
+            throw new IllegalPizza("Illegal combination of toppings!"); // Only allowed pepper or pineapple if there's ham
         }
         this.pineapple = pineapple;
         this.pepper = pepper;
@@ -67,16 +67,16 @@ public class Pizza implements Serializable {
                 LegalPizzaChoices.Topping.Single);
     }
 
-    /**
+     /**
      * Gets the cost of the Pizza object, with prices as outlined in the assignment document
      * @return The cost of the pizza
      */
     public double getCost() {
-        double cost = 7.00;
+        double cost = 7.00; // $7 for Small, Single cheese
         // increase cost based on size
-        cost += size.ordinal() * 2;
+        cost += size.ordinal() * 2; // $9 for Medium, $11 for Large
         // increase cost based on # of toppings
-        cost += 1.5 * (cheese.ordinal() + pepper.ordinal() + pineapple.ordinal() + ham.ordinal());
+        cost += 1.5 * (cheese.ordinal() + pepper.ordinal() + pineapple.ordinal() + ham.ordinal()); // $1.5 per topping
         return cost;
     }
 
@@ -124,7 +124,7 @@ public class Pizza implements Serializable {
             pizzaCopy = new Pizza(size, cheese, pineapple, pepper, ham);
         }
         catch(IllegalPizza e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // If pizzaCopy cannot be instantiated, throw an unchecked exception
         }
         return pizzaCopy;
     }
