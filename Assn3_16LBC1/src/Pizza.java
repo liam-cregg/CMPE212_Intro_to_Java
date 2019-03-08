@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 /**
+ * The Pizza object used by the PizzaEnumsOrderSystem. Includes the size, cheese, and toppings of the pizza
  * @author Liam Cregg - 16LBC1 - 20054881
  * @version 1.0
  */
@@ -13,6 +14,15 @@ public class Pizza implements Serializable {
     private LegalPizzaChoices.Topping pepper;
     private LegalPizzaChoices.Topping ham;
 
+    /**
+     * Constructor for the Pizza object, allows choices as seen in LegalPizzaChoices.
+     * @param size The size of the pizza, possible values are Small, Medium, Large
+     * @param cheese The amount of cheese, possible values are Single, Double, Triple
+     * @param pineapple The pineapple topping, either None or Single. Can only be Single if ham is also Single
+     * @param pepper The green pepper topping, either None or Single. Can only be Single if ham is also Single
+     * @param ham The ham topping, either None or Single
+     * @throws IllegalPizza If any argument is null, or if there is an illegal combination of toppings
+     */
     public Pizza (LegalPizzaChoices.Size size, LegalPizzaChoices.Cheese cheese,
                  LegalPizzaChoices.Topping pineapple, LegalPizzaChoices.Topping pepper,
                  LegalPizzaChoices.Topping ham) throws IllegalPizza {
@@ -47,12 +57,20 @@ public class Pizza implements Serializable {
         this.pepper = pepper;
     }
 
+    /**
+     * Default constructor, makes a Small pizza with Single cheese and Single ham
+     * @throws IllegalPizza If something goes wrong with the regular constructor
+     */
     public Pizza() throws IllegalPizza {
         this(LegalPizzaChoices.Size.Small, LegalPizzaChoices.Cheese.Single,
                 LegalPizzaChoices.Topping.None, LegalPizzaChoices.Topping.None,
                 LegalPizzaChoices.Topping.Single);
     }
 
+    /**
+     * Gets the cost of the Pizza object, with prices as outlined in the assignment document
+     * @return The cost of the pizza
+     */
     public double getCost() {
         double cost = 7.00;
         // increase cost based on size
@@ -62,6 +80,10 @@ public class Pizza implements Serializable {
         return cost;
     }
 
+    /**
+     * Describes the Pizza object as a String
+     * @return The String describing the pizza
+     */
     @Override
     public String toString() {
         String s = size + " pizza, " + cheese + " cheese";
@@ -75,6 +97,11 @@ public class Pizza implements Serializable {
         return s;
     }
 
+    /**
+     * Checks for the equality of two Pizza objects based on their attributes
+     * @param other The other Pizza object to check against
+     * @return True if the same, false if not
+     */
     @Override
     public boolean equals(Object other) {
         if(other instanceof Pizza) {
@@ -83,6 +110,12 @@ public class Pizza implements Serializable {
             }
         return false;
     }
+
+    /**
+     * Clones the Pizza object. Not used in the order system but included for completeness
+     * @return The cloned Pizza object
+     * @throws RuntimeException If the cloned object is illegal
+     */
     @Override
     public Pizza clone() {
         Pizza pizzaCopy = null;
