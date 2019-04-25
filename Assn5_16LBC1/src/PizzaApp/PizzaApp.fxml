@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="410.0" prefWidth="437.0" stylesheets="@PizzaApp.css" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PizzaApp.Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="0.0" prefWidth="103.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="144.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="91.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="89.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="256.0" minHeight="8.0" prefHeight="54.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <ChoiceBox fx:id="sizeChoice" onKeyPressed="#sizeDropDown" prefWidth="150.0" GridPane.columnIndex="1" />
+        <ChoiceBox fx:id="cheeseChoice" onKeyPressed="#cheeseDropDown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Pizza Size:" />
+        <Label text="Cheese:" GridPane.rowIndex="1" />
+        <Label text="Toppings:" GridPane.rowIndex="2" />
+        <CheckBox fx:id="hamBox" mnemonicParsing="false" onAction="#hamClick" text="Ham" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <CheckBox fx:id="pineappleBox" layoutX="87.0" layoutY="157.0" mnemonicParsing="false" onAction="#pineappleClick" text="Pineapple" GridPane.rowIndex="4" />
+        <CheckBox fx:id="pepperBox" layoutX="267.0" layoutY="223.0" mnemonicParsing="false" onAction="#pepperClick" text="Green Pepper" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="costField" editable="false" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <Label text="Cost per Pizza:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Label layoutX="262.0" layoutY="213.0" text="Number?" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <TextField fx:id="number" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <TextArea fx:id="orderField" editable="false" prefHeight="50.0" prefWidth="472.0" GridPane.columnSpan="4" GridPane.rowIndex="6" />
+        <Label text="Current Order:" GridPane.rowIndex="5" />
+        <ImageView fx:id="image" fitHeight="120.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowSpan="2" />
+        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addClick" prefHeight="25.0" prefWidth="98.0" text="Add to Order" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+        <Label text="Line Item Cost:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <TextField fx:id="itemCostField" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+    </children>
+</GridPane>

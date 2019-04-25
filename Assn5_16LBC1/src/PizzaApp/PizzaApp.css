@@ -1,0 +1,7 @@
+.root {
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-grid-lines-visible: false;
+	-fx-padding: 30px;
+	-fx-alignment: center;
+}
